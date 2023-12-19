@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+specVersion: "3.1"
+metadata:
+  name: com.casestudy.salesoverview07.zcsalesovp07
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        ignoreCertError: true
+        log: 0
+        target:
+          destination: BTP_HTTP
+          url: env:ABAP_URL
+          auth: basic
+          client: env:ABAP_CLIENT
+        credentials:
+          username: env:ABAP_USER
+          password: env:ABAP_PASSWORD
+        app:
+          name: zcsalesovp07
+          description: salesapp 07
+          package: ZPCASESDY07
+          transport: MD1K903766
+        exclude:
+          - /test/
